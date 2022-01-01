@@ -44,8 +44,19 @@ module.exports.footerData = [
       },
       { name: "Deliver with Us", linkURL: "#" },
       { name: "Advertise your product", linkURL: "#" },
-      { name: "FAQs (Become Business Partner with Us)", linkURL: "#" },
+      { name: "FAQs", linkURL: "#" },
     ],
   },
-  { categoryName: "Locate Us", rowSizeCSS: 6, horizontalAlignment: "center", fontColor: "white", content: [] },
+  {
+    categoryName: "Locate Us",
+    rowSizeCSS: 6,
+    horizontalAlignment: "left",
+    fontColor: "white",
+    content: [],
+    mapData: {
+      latitude: 28.709639429605375,
+      longitude: 77.08388041301207,
+      zoom: 14.5,
+    },
+  },
 ];
