@@ -3,6 +3,7 @@ import React, { useRef } from "react";
 import Routes from "./routes/Routes";
 import Header from "./pages/Homepage/components/header";
 import Footer from "./pages/Homepage/components/footer";
+import Segment from "./pages/Homepage/components/segments";
 
 function Layout({ match }) {
   const navbarRef = useRef(null);
@@ -10,6 +11,7 @@ function Layout({ match }) {
   return (
     <div className="mainContainer">
       <Header />
+      <Segment />
       <Routes match={match} navbarRef={navbarRef} />
       <Footer />
     </div>

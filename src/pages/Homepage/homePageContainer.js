@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import EventCarousal from "./components/eventCarousal";
 
 class HomePage extends Component {
   constructor(props) {
@@ -8,9 +9,9 @@ class HomePage extends Component {
 
   render() {
     return (
-      <Fragment>
-        <div>Starter</div>
-      </Fragment>
+      [
+        <EventCarousal />
+      ]
     );
   }
 }

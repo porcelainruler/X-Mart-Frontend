@@ -26,6 +26,8 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { userActionCreators } from "../../../state/user/userAction";
+import { compIdentifier } from "../../../constants/componentIdentifiersList";
+import { colorConfig } from "../../../constants/colorConfig";
 
 const muiTheme = createTheme({
   palette: {
@@ -190,20 +192,20 @@ const Header = ({ profileGlobal }) => {
       </MenuItem>
 
       {!profile.isLoggedIn ? (
-          <>
-          <MenuItem onClick={handleProfileMenuOpen}>
+        <>
+          <MenuItem>
             <IconButton size="large" aria-label="Click to login" aria-controls="primary-search-account-menu" aria-haspopup="true" color="inherit">
               <LoginIcon />
             </IconButton>
             <p>Login</p>
           </MenuItem>
-          <MenuItem onClick={handleProfileMenuOpen}>
+          <MenuItem>
             <IconButton size="large" aria-label="Click to register" aria-controls="primary-search-account-menu" aria-haspopup="true" color="inherit">
               <AppRegistrationIcon />
             </IconButton>
             <p>Register</p>
           </MenuItem>
-          </>
+        </>
       ) : (
         <MenuItem onClick={handleProfileMenuOpen}>
           <IconButton size="large" aria-label="account of current user" aria-controls="primary-search-account-menu" aria-haspopup="true" color="inherit">
@@ -233,7 +235,7 @@ const Header = ({ profileGlobal }) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <ThemeProvider theme={muiTheme}>
-        <AppBar position="static">
+        <AppBar position="static" style={{backgroundColor: colorConfig.mainColor}}>
           <Toolbar>
             <Typography className="mr-50 pr-5" variant="h6" component="div" sx={{ display: { xs: "none", sm: "block" } }} width="100px" minWidth="100px">
               X Mart
@@ -274,33 +276,36 @@ const Header = ({ profileGlobal }) => {
                 </Badge>
               </IconButton>
 
-              {!profile.isLoggedIn ? (
-                <React.Fragment>
-                  <IconButton size="large" aria-label="Click to login" color="inherit">
-                    <LoginIcon />
-                  </IconButton>
-                  <p>Login</p>
-                  <IconButton size="large" aria-label="Click to register" color="inherit">
-                    <AppRegistrationIcon />
-                  </IconButton>
-                  <p>Register</p>
-                </React.Fragment>
-              ) : (
-                <React.Fragment>
-                  <IconButton
-                    size="large"
-                    edge="end"
-                    aria-label="account of current user"
-                    aria-controls={menuId}
-                    aria-haspopup="true"
-                    onClick={handleProfileMenuOpen}
-                    color="inherit"
-                  >
-                    <AccountCircle />
-                  </IconButton>
-                  <p>Profile</p>
-                </React.Fragment>
-              )}
+              {!profile.isLoggedIn
+                ? [
+                    <MenuItem>
+                      <IconButton size="large" aria-label="Click to login" color="inherit" key={compIdentifier.login1}>
+                        <LoginIcon />
+                      </IconButton>
+                      <p key={compIdentifier.login2}>Login</p>
+                    </MenuItem>,
+                    <MenuItem>
+                      <IconButton size="large" aria-label="Click to register" color="inherit" key={compIdentifier.register1}>
+                        <AppRegistrationIcon />
+                      </IconButton>
+                      <p key={compIdentifier.register2}>Register</p>
+                    </MenuItem>,
+                  ]
+                : [
+                    <IconButton
+                      size="large"
+                      edge="end"
+                      aria-label="account of current user"
+                      aria-controls={menuId}
+                      aria-haspopup="true"
+                      onClick={handleProfileMenuOpen}
+                      color="inherit"
+                    >
+                      ,
+                      <AccountCircle />,
+                    </IconButton>,
+                    <p>Profile</p>,
+                  ]}
             </Box>
             <Box sx={{ display: { xs: "flex", md: "none" } }}>
               <IconButton size="large" aria-label="show more" aria-controls={mobileMenuId} aria-haspopup="true" onClick={handleMobileMenuOpen} color="inherit">
