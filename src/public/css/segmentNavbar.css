@@ -6,3 +6,13 @@
 .segmentNavStack::-webkit-scrollbar { 
     display: none;  /* Safari and Chrome */
 }
+
+.segmentButton:hover {
+    background-color: #998CEB;
+    color: white;
+}
+
+.segmentButton:active {
+    background-color: #7900FF;
+    color: white;
+}

@@ -5,12 +5,11 @@ import eventData from "../../../constants/events";
 
 function CarousalItem(props) {
   return (
-    <Paper style={{ backgroundImage: props.item.imagePath }}>
+    <>
+      <Paper style={{ backgroundImage: `url(${props.item.imagePath})`, height: "200px", width: "90%", marginLeft: "auto", marginRight: "auto" }}>
+      </Paper>
       <h2>{props.item.displayName}</h2>
-      <p>{props.item.name}</p>
-
-      <Button className="CheckButton">Check it out!</Button>
-    </Paper>
+    </>
   );
 }
 

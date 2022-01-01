@@ -12,7 +12,8 @@ const getWSUrl = (testing = true) => {
     return testing ? devWSUrl : prodWSUrl;
 };
 
-const mapAPIPublicKey = "pk.eyJ1IjoiaW1tb3J0YWxsb3JkIiwiYSI6ImNreHZzNTltdDI0NzIycHA0eXU1bGxvem0ifQ.UDSWw-Zps_HHRpC0kbPSrA";
+// const mapAPIPublicKey = "pk.eyJ1IjoiaW1tb3J0YWxsb3JkIiwiYSI6ImNreHZzNTltdDI0NzIycHA0eXU1bGxvem0ifQ.UDSWw-Zps_HHRpC0kbPSrA";
+const mapAPIPublicKey = "";
 
 module.exports = {
     getAPIUrl,

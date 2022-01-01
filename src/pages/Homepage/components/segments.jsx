@@ -20,10 +20,12 @@ const Item = styled(Paper)(({ theme }) => ({
 class Segments extends Component {
   constructor(props) {
     super(props);
+    console.log("Props Icon:", props);
 
     console.log(segmentData);
     this.state = {
       segments: [],
+      isIconMode: props.isIconMode === false ? props.isIconMode : true,
       isLoading: false,
     };
   }
@@ -43,108 +45,147 @@ class Segments extends Component {
   }
 
   render() {
-    const { isLoading, segments } = this.state;
+    const { isLoading, segments, isIconMode } = this.state;
+    console.log("IconMode:", isIconMode);
 
     return (
       <Fragment>
         {!isLoading ? (
-          <List className="segmentMainContainer">
-            <ListItem>
-              <Stack
-                container
-                direction="row"
-                alignItems="center"
-                spacing={{ xs: 1, sm: 2, md: 3 }}
-                style={{ overflow: "scroll", marginLeft: "auto", marginRight: "auto", padding: "5px" }}
-                className="segmentNavStack"
-              >
-                {segmentData.segments.map((segment, idx) => [
-                  <Stack item key={compIdentifier.segGrid + "_" + idx}>
-                    {/* <LinkIcon className={classes.linkIcon} /> */}
-                    <Item style={{ minWidth: "80px" }}>
-                      <img src={segment.imagePath} style={{ width: "50px", height: "50px" }}></img>
-                      <span style={{ whiteSpace: "nowrap" }}>{segment.displayName}</span>
-                    </Item>
-                  </Stack>,
-                ])}
-              </Stack>
-            </ListItem>
+          isIconMode ? (
+            <List className="segmentMainContainer">
+              <ListItem>
+                <Stack
+                  container
+                  direction="row"
+                  alignItems="center"
+                  spacing={{ xs: 1, sm: 2, md: 3 }}
+                  style={{ overflow: "scroll", marginLeft: "auto", marginRight: "auto", padding: "5px" }}
+                  className="segmentNavStack"
+                >
+                  {segmentData.segments.map((segment, idx) => [
+                    <Stack item key={compIdentifier.segGrid + "_" + idx}>
+                      {/* <LinkIcon className={classes.linkIcon} /> */}
+                      <Item style={{ minWidth: "80px" }} className="segmentButton">
+                        <img src={segment.imagePath} style={{ width: "50px", height: "50px" }}></img>
+                        <span style={{ whiteSpace: "nowrap" }}>{segment.displayName}</span>
+                      </Item>
+                    </Stack>,
+                  ])}
+                </Stack>
+              </ListItem>
+              <Divider />
+            </List>
+          ) : (
+            <List className="segmentMainContainer">
+              <ListItem>
+                <Stack
+                  container
+                  direction="row"
+                  alignItems="center"
+                  spacing={{ xs: 1, sm: 2, md: 3 }}
+                  style={{ overflow: "scroll", marginLeft: "auto", marginRight: "auto", padding: "5px" }}
+                  className="segmentNavStack"
+                >
+                  {segmentData.segments.map((segment, idx) => [
+                    <Stack item key={compIdentifier.segGrid + "_" + idx}>
+                      {/* <LinkIcon className={classes.linkIcon} /> */}
+                      <Item style={{ minWidth: "80px" }} className="segmentButton">
+                        <span style={{ whiteSpace: "nowrap" }}>{segment.displayName}</span>
+                      </Item>
+                    </Stack>,
+                  ])}
+                </Stack>
+              </ListItem>
+              <Divider />
+            </List>
+          )
+        ) : isIconMode ? (
+          <>
+            <Grid container wrap="nowrap" style={{ display: "flex", flexDirection: "row", flexFlow: "row", justifyContent: "space-evenly" }}>
+              <Box style={{ width: 86, padding: 16 }}>
+                <Skeleton variant="rectangular" width={86} height={76} />
+                <Box sx={{ pt: 0.5 }}>
+                  <Skeleton />
+                  <Skeleton width="60%" />
+                </Box>
+              </Box>
+
+              <Box style={{ width: 86, padding: 16 }}>
+                <Skeleton variant="rectangular" width={86} height={76} />
+                <Box sx={{ pt: 0.5 }}>
+                  <Skeleton />
+                  <Skeleton width="60%" />
+                </Box>
+              </Box>
+
+              <Box style={{ width: 86, padding: 16 }}>
+                <Skeleton variant="rectangular" width={86} height={76} />
+                <Box sx={{ pt: 0.5 }}>
+                  <Skeleton />
+                  <Skeleton width="60%" />
+                </Box>
+              </Box>
+
+              <Box style={{ width: 86, padding: 16 }}>
+                <Skeleton variant="rectangular" width={86} height={76} />
+                <Box sx={{ pt: 0.5 }}>
+                  <Skeleton />
+                  <Skeleton width="60%" />
+                </Box>
+              </Box>
+
+              <Box style={{ width: 86, padding: 16 }}>
+                <Skeleton variant="rectangular" width={86} height={76} />
+                <Box sx={{ pt: 0.5 }}>
+                  <Skeleton />
+                  <Skeleton width="60%" />
+                </Box>
+              </Box>
+
+              <Box style={{ width: 86, padding: 16 }}>
+                <Skeleton variant="rectangular" width={86} height={76} />
+                <Box sx={{ pt: 0.5 }}>
+                  <Skeleton />
+                  <Skeleton width="60%" />
+                </Box>
+              </Box>
+
+              <Box style={{ width: 86, padding: 16 }}>
+                <Skeleton variant="rectangular" width={86} height={76} />
+                <Box sx={{ pt: 0.5 }}>
+                  <Skeleton />
+                  <Skeleton width="60%" />
+                </Box>
+              </Box>
+
+              <Box style={{ width: 86, padding: 16 }}>
+                <Skeleton variant="rectangular" width={86} height={76} />
+                <Box sx={{ pt: 0.5 }}>
+                  <Skeleton />
+                  <Skeleton width="60%" />
+                </Box>
+              </Box>
+
+              <Box style={{ width: 86, padding: 16 }}>
+                <Skeleton variant="rectangular" width={86} height={76} />
+                <Box sx={{ pt: 0.5 }}>
+                  <Skeleton />
+                  <Skeleton width="60%" />
+                </Box>
+              </Box>
+            </Grid>
             <Divider />
-          </List>
+          </>
         ) : (
-          <Grid container wrap="nowrap" style={{display: "flex", flexDirection: "row", flexFlow: "row", justifyContent: "space-evenly"}}>
-            <Box style={{ width: 86, padding: 16 }}>
-              <Skeleton variant="rectangular" width={86} height={76} />
-              <Box sx={{ pt: 0.5 }}>
+          <>
+            <Grid container wrap="nowrap" style={{ display: "flex", flexDirection: "row", flexFlow: "row", justifyContent: "space-evenly" }}>
+              <Box style={{ width: "80%", padding: 16 }}>
                 <Skeleton />
                 <Skeleton width="60%" />
               </Box>
-            </Box>
-
-            <Box style={{ width: 86, padding: 16 }}>
-              <Skeleton variant="rectangular" width={86} height={76} />
-              <Box sx={{ pt: 0.5 }}>
-                <Skeleton />
-                <Skeleton width="60%" />
-              </Box>
-            </Box>
-
-            <Box style={{ width: 86, padding: 16 }}>
-              <Skeleton variant="rectangular" width={86} height={76} />
-              <Box sx={{ pt: 0.5 }}>
-                <Skeleton />
-                <Skeleton width="60%" />
-              </Box>
-            </Box>
-
-            <Box style={{ width: 86, padding: 16 }}>
-              <Skeleton variant="rectangular" width={86} height={76} />
-              <Box sx={{ pt: 0.5 }}>
-                <Skeleton />
-                <Skeleton width="60%" />
-              </Box>
-            </Box>
-
-            <Box style={{ width: 86, padding: 16 }}>
-              <Skeleton variant="rectangular" width={86} height={76} />
-              <Box sx={{ pt: 0.5 }}>
-                <Skeleton />
-                <Skeleton width="60%" />
-              </Box>
-            </Box>
-
-            <Box style={{ width: 86, padding: 16 }}>
-              <Skeleton variant="rectangular" width={86} height={76} />
-              <Box sx={{ pt: 0.5 }}>
-                <Skeleton />
-                <Skeleton width="60%" />
-              </Box>
-            </Box>
-
-            <Box style={{ width: 86, padding: 16 }}>
-              <Skeleton variant="rectangular" width={86} height={76} />
-              <Box sx={{ pt: 0.5 }}>
-                <Skeleton />
-                <Skeleton width="60%" />
-              </Box>
-            </Box>
-
-            <Box style={{ width: 86, padding: 16 }}>
-              <Skeleton variant="rectangular" width={86} height={76} />
-              <Box sx={{ pt: 0.5 }}>
-                <Skeleton />
-                <Skeleton width="60%" />
-              </Box>
-            </Box>
-
-            <Box style={{ width: 86, padding: 16 }}>
-              <Skeleton variant="rectangular" width={86} height={76} />
-              <Box sx={{ pt: 0.5 }}>
-                <Skeleton />
-                <Skeleton width="60%" />
-              </Box>
-            </Box>
-          </Grid>
+            </Grid>
+            <Divider />
+          </>
         )}
       </Fragment>
     );

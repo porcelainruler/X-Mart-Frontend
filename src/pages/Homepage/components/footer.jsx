@@ -93,11 +93,11 @@ class Footer extends Component {
             color: "white",
           }}
         >
-          <div style={{ paddingRight: "5px" }}> Return Policy</div>
-          <div style={{ paddingRight: "5px" }}> Term of Use</div>
-          <div style={{ paddingRight: "5px" }}> FAQs</div>
-          <div style={{ paddingRight: "5px" }}> Raise a Ticket</div>
-          <div style={{ paddingRight: "5px" }}> Security</div>
+          <div style={{ paddingRight: "5px", paddingRight: "5px", paddingLeft: "5px" }}> Return Policy</div>
+          <div style={{ paddingRight: "5px", paddingRight: "5px", paddingLeft: "5px" }}> Term of Use</div>
+          <div style={{ paddingRight: "5px", paddingRight: "5px", paddingLeft: "5px" }}> FAQs</div>
+          <div style={{ paddingRight: "5px", paddingRight: "5px", paddingLeft: "5px" }}> Raise a Ticket</div>
+          <div style={{ paddingRight: "5px", paddingRight: "5px", paddingLeft: "5px" }}> Security</div>
         </div>
 
         <div

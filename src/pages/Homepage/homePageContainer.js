@@ -10,7 +10,8 @@ class HomePage extends Component {
   render() {
     return (
       [
-        <EventCarousal />
+        <EventCarousal />,
+        <h1>Something</h1>
       ]
     );
   }

@@ -11,7 +11,7 @@ function Layout({ match }) {
   return (
     <div className="mainContainer">
       <Header />
-      <Segment />
+      <Segment isIconMode={true}/>
       <Routes match={match} navbarRef={navbarRef} />
       <Footer />
     </div>
