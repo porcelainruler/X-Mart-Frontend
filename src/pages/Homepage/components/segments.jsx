@@ -20,9 +20,7 @@ const Item = styled(Paper)(({ theme }) => ({
 class Segments extends Component {
   constructor(props) {
     super(props);
-    console.log("Props Icon:", props);
 
-    console.log(segmentData);
     this.state = {
       segments: [],
       isIconMode: props.isIconMode === false ? props.isIconMode : true,

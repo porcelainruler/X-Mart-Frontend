@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Typography } from "@mui/material";
+import { Link, Typography } from "@mui/material";
 import { Divider } from "@mui/material";
 import { footerData } from "../../../constants/footer";
 import { colorConfig } from "../../../constants/colorConfig";
@@ -8,6 +8,7 @@ import RoomOutlinedIcon from "@mui/icons-material/RoomOutlined";
 
 import { mapAPIPublicKey } from "../../../config/backendConfig";
 import ReactMapGL, { Marker } from "react-map-gl"; 
+import { routesData } from "../../../constants/routesData";
 
 class Footer extends Component {
   constructor(props) {
@@ -31,7 +32,6 @@ class Footer extends Component {
 
   componentDidMount() {
     const { viewport, officeLocation } = this.state;
-
   }
 
   render() {
@@ -62,6 +62,9 @@ class Footer extends Component {
               {footer.content.map((categorySubContent) => (
                 <div style={{ fontSize: 14, color: "aliceblue", textAlign: "left", padding: 2 }}>{categorySubContent.name}</div>
               ))}
+              {footer.location ? (
+                <div style={{ fontSize: 14, color: "aliceblue", textAlign: "left", padding: 2, marginBottom: "5px" }}>{footer.location}</div>
+              ) : null}
               {footer.mapData ? (
                 <ReactMapGL
                   mapboxApiAccessToken={mapAPIPublicKey}
@@ -93,11 +96,31 @@ class Footer extends Component {
             color: "white",
           }}
         >
-          <div style={{ paddingRight: "5px", paddingRight: "5px", paddingLeft: "5px" }}> Return Policy</div>
-          <div style={{ paddingRight: "5px", paddingRight: "5px", paddingLeft: "5px" }}> Term of Use</div>
-          <div style={{ paddingRight: "5px", paddingRight: "5px", paddingLeft: "5px" }}> FAQs</div>
-          <div style={{ paddingRight: "5px", paddingRight: "5px", paddingLeft: "5px" }}> Raise a Ticket</div>
-          <div style={{ paddingRight: "5px", paddingRight: "5px", paddingLeft: "5px" }}> Security</div>
+          <div style={{ paddingRight: "5px", paddingRight: "5px", paddingLeft: "5px" }}>
+            <Link href={routesData.returnPolicy} underline="none" color="inherit" style={{ color: "white", marginLeft: "4px" }}>
+              Return Policy
+            </Link>
+          </div>
+          <div style={{ paddingRight: "5px", paddingRight: "5px", paddingLeft: "5px" }}>
+            <Link href={routesData.termOfUse} underline="none" color="inherit" style={{ color: "white", marginLeft: "4px" }}>
+              Term of Use
+            </Link>
+          </div>
+          <div style={{ paddingRight: "5px", paddingRight: "5px", paddingLeft: "5px" }}>
+            <Link href={routesData.faqs} underline="none" color="inherit" style={{ color: "white", marginLeft: "4px" }}>
+              FAQs
+            </Link>
+          </div>
+          <div style={{ paddingRight: "5px", paddingRight: "5px", paddingLeft: "5px" }}>
+            <Link href={routesData.raiseTicket} underline="none" color="inherit" style={{ color: "white", marginLeft: "4px" }}>
+              Raise a Ticket
+            </Link>
+          </div>
+          <div style={{ paddingRight: "5px", paddingRight: "5px", paddingLeft: "5px" }}>
+            <Link href={routesData.security} underline="none" color="inherit" style={{ color: "white", marginLeft: "4px" }}>
+              Security
+            </Link>
+          </div>
         </div>
 
         <div
@@ -115,7 +138,13 @@ class Footer extends Component {
             color: "white",
           }}
         >
-          <div> In case of query, contact us at support@xmart.com or raise a ticket</div>
+          <div>
+            {" "}
+            In case of query, contact us at support@xmart.com or raise a
+            <Link href={routesData.raiseTicket} underline="always" color="inherit" style={{ color: "white", marginLeft: "4px" }}>
+              ticket
+            </Link>
+          </div>
         </div>
 
         <div

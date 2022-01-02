@@ -53,10 +53,11 @@ module.exports.footerData = [
     horizontalAlignment: "left",
     fontColor: "white",
     content: [],
+    location: "J-1/59-60A, Budh Vihar Phase-1\nDelhi-110086, India",
     mapData: {
       latitude: 28.709639429605375,
       longitude: 77.08388041301207,
-      zoom: 14.5,
+      zoom: 11,
     },
   },
 ];

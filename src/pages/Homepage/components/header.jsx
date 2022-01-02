@@ -28,12 +28,11 @@ import { connect } from "react-redux";
 import { userActionCreators } from "../../../state/user/userAction";
 import { compIdentifier } from "../../../constants/componentIdentifiersList";
 import { colorConfig } from "../../../constants/colorConfig";
+import { Link } from "@mui/material";
+import { routesData } from "../../../constants/routesData";
 
 const muiTheme = createTheme({
   palette: {
-    // primary: {
-    //   main: "white",
-    // },
     background: {
       main: "white",
       color: "white",
@@ -104,6 +103,12 @@ const Header = ({ profileGlobal }) => {
     }
   });
 
+  React.useEffect(() => {
+    setProfile({
+      ...profileGlobal.profile,
+    });
+  }, [profileGlobal]);
+
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -167,24 +172,24 @@ const Header = ({ profileGlobal }) => {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton size="large" aria-label="show 1 products in cart" color="inherit">
-          <Badge badgeContent={4} color="error">
+        <IconButton size="large" aria-label={`show ${profile && profile.orderCount} products in cart`} color="inherit">
+          <Badge badgeContent={profile && profile.orderCount} color="error">
             <ShoppingCartIcon />
           </Badge>
         </IconButton>
         <p>Cart</p>
       </MenuItem>
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
+        <IconButton size="large" aria-label={`show ${profile && profile.messageCount} new mails`} color="inherit">
+          <Badge badgeContent={profile && profile.messageCount} color="error">
             <MailIcon />
           </Badge>
         </IconButton>
         <p>Messages</p>
       </MenuItem>
       <MenuItem>
-        <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
-          <Badge badgeContent={17} color="error">
+        <IconButton size="large" aria-label={`show ${profile && profile.notificationCount} new notifications`} color="inherit">
+          <Badge badgeContent={profile && profile.notificationCount} color="error">
             <NotificationsIcon />
           </Badge>
         </IconButton>
@@ -235,10 +240,12 @@ const Header = ({ profileGlobal }) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <ThemeProvider theme={muiTheme}>
-        <AppBar position="static" style={{backgroundColor: colorConfig.mainColor}}>
+        <AppBar position="static" style={{ backgroundColor: colorConfig.mainColor }}>
           <Toolbar>
             <Typography className="mr-50 pr-5" variant="h6" component="div" sx={{ display: { xs: "none", sm: "block" } }} width="100px" minWidth="100px">
+                          <Link href={routesData.home} underline="none" color="inherit" style={{ color: "white", marginLeft: "4px" }}>
               X Mart
+              </Link>
             </Typography>
             <Typography className="mr-50 pr-5" variant="h6" component="div" sx={{ display: { xs: "block", sm: "none" } }} width="100px" minWidth="100px">
               X Mart
@@ -260,18 +267,18 @@ const Header = ({ profileGlobal }) => {
 
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              <IconButton size="large" aria-label="show 1 products in cart" color="inherit">
-                <Badge badgeContent={1} color="error">
+              <IconButton size="large" aria-label={`show ${profile && profile.orderCount} products in cart`} color="inherit">
+                <Badge badgeContent={profile && profile.orderCount} color="error">
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>
-              <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                <Badge badgeContent={4} color="error">
+              <IconButton size="large" aria-label={`show ${profile && profile.messageCount} new mails`} color="inherit">
+                <Badge badgeContent={profile && profile.messageCount} color="error">
                   <MailIcon />
                 </Badge>
               </IconButton>
-              <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
-                <Badge badgeContent={17} color="error">
+              <IconButton size="large" aria-label={`show ${profile && profile.notificationCount} new notifications`} color="inherit">
+                <Badge badgeContent={profile && profile.notificationCount} color="error">
                   <NotificationsIcon />
                 </Badge>
               </IconButton>

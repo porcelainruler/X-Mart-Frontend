@@ -27,11 +27,9 @@ function CarousalItem(props) {
 class EventCarousal extends Component {
   constructor(props) {
     super(props);
-    // this.incrementAge = this.incrementAge.bind(this);
   }
 
   render() {
-    console.log(eventData);
     return (
       <Carousel>
         {eventData.events.map((event, i) => (

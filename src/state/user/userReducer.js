@@ -1,6 +1,6 @@
 import {userActions} from './userAction';
 
-const initialState = {
+let initialState = {
   profile: {
     id: -1,
     firstName: "",
@@ -17,6 +17,9 @@ const initialState = {
     isBanned: false,
     profileImagePath: "",
     isLoggedIn: false,
+    messageCount: 1,
+    notificationCount: 1,
+    orderCount: 1,
     jwtToken: "",
     subscribedToNewsLetter: false,
   },
@@ -27,10 +30,13 @@ const initialState = {
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case userActions.LOGIN:
-      console.log("Login", action.payload.user);
+      console.log("Login", action.payload.user, {
+        ...state,
+        profile: action.payload.user.profile,
+      });
       return {
         ...state,
-        profile: action.payload.user,
+        profile: action.payload.user.profile,
       };
     case userActions.ADD_USER:
       return {
