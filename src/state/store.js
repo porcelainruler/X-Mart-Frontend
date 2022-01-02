@@ -2,9 +2,11 @@ import { createStore, combineReducers, compose, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 
 import profile from "./user/userReducer";
+import setting from "./setting/settingReducer";
 
 const rootReducer = combineReducers({
   user: profile,
+  setting: setting,
 });
 
 const configureStore = () => {

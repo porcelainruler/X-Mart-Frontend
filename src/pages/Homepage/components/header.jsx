@@ -18,18 +18,20 @@ import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LoginIcon from "@mui/icons-material/Login";
 import MoreIcon from "@mui/icons-material/MoreVert";
+import SettingsIcon from "@mui/icons-material/Settings";
 import * as Colors from "@mui/material/colors";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 // import logo_small from "../../../public/x-mart-shortened-logo.png";
 // import logo from "../../../public/x-mart-logo.png";
 // import logo from "../../../public/x-mart-logo_auto_x2_colored.jpg";
 import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { userActionCreators } from "../../../state/user/userAction";
 import { compIdentifier } from "../../../constants/componentIdentifiersList";
 import { colorConfig } from "../../../constants/colorConfig";
 import { Link } from "@mui/material";
 import { routesData } from "../../../constants/routesData";
+import { settingActionCreators } from "../../../state/setting/settingAction";
 
 const muiTheme = createTheme({
   palette: {
@@ -89,12 +91,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const Header = ({ profileGlobal }) => {
+const Header = ({ profileGlobal, settings }) => {
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [profile, setProfile] = React.useState({
     ...profileGlobal.profile,
   });
+  const [setting, setSetting] = React.useState({...settings});
 
   React.useEffect(() => {
     const jwtToken = localStorage.getItem("token");
@@ -108,6 +112,10 @@ const Header = ({ profileGlobal }) => {
       ...profileGlobal.profile,
     });
   }, [profileGlobal]);
+  
+  React.useEffect(() => {
+    setSetting({ ...settings });
+  }, [settings]);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -128,6 +136,10 @@ const Header = ({ profileGlobal }) => {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+  const handleSettingModal = () => {
+    dispatch(settingActionCreators.saveSetting({ ...setting, isSettingModalOpen: true }));
+  }
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -195,6 +207,12 @@ const Header = ({ profileGlobal }) => {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
+      <MenuItem onClick={handleSettingModal}>
+        <IconButton size="large" aria-label={`customize website fonts, color and much more`} color="inherit">
+            <SettingsIcon />
+        </IconButton>
+        <p>Settings</p>
+      </MenuItem>
 
       {!profile.isLoggedIn ? (
         <>
@@ -243,8 +261,8 @@ const Header = ({ profileGlobal }) => {
         <AppBar position="static" style={{ backgroundColor: colorConfig.mainColor }}>
           <Toolbar>
             <Typography className="mr-50 pr-5" variant="h6" component="div" sx={{ display: { xs: "none", sm: "block" } }} width="100px" minWidth="100px">
-                          <Link href={routesData.home} underline="none" color="inherit" style={{ color: "white", marginLeft: "4px" }}>
-              X Mart
+              <Link href={routesData.home} underline="none" color="inherit" style={{ color: "white", marginLeft: "4px" }}>
+                X Mart
               </Link>
             </Typography>
             <Typography className="mr-50 pr-5" variant="h6" component="div" sx={{ display: { xs: "block", sm: "none" } }} width="100px" minWidth="100px">
@@ -281,6 +299,9 @@ const Header = ({ profileGlobal }) => {
                 <Badge badgeContent={profile && profile.notificationCount} color="error">
                   <NotificationsIcon />
                 </Badge>
+              </IconButton>
+              <IconButton size="large" aria-label={`customize website fonts, color and much more`} color="inherit" onClick={handleSettingModal}>
+                <SettingsIcon />
               </IconButton>
 
               {!profile.isLoggedIn
@@ -331,6 +352,7 @@ const Header = ({ profileGlobal }) => {
 const mapStateToProps = (state) => {
   return {
     profileGlobal: state.user,
+    settings: state.setting,
   };
 };
 
