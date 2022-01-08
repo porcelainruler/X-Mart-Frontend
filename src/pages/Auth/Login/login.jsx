@@ -1,4 +1,4 @@
-import { Box, Modal, Typography, Button, ToggleButtonGroup, ToggleButton, IconButton, Chip, Divider } from "@mui/material";
+import { Box, Modal, Typography, Button, ToggleButtonGroup, ToggleButton, IconButton, Chip, Divider, TextField, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import React, { Component, Fragment, useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 import { settingActionCreators } from "../../../state/setting/settingAction";
@@ -55,6 +55,10 @@ const LoginModal = ({ settings }) => {
       });
       console.log(setting);
     }
+  };
+
+  const handleUserLoginTypeChange = () => {
+    // Do Something
   };
 
   return (
@@ -169,18 +173,40 @@ const LoginModal = ({ settings }) => {
                   </Divider>
                 </div>
               </div>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                Under Construction
-              </Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                Under Construction
-              </Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                Under Construction
-              </Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                Under Construction
-              </Typography>
+              <div
+                style={{
+                  height: "200px",
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  flexFlow: "column",
+                  justifyContent: "space-evenly",
+                  alignItems: "center",
+                }}
+              >
+                <select
+                  style={{
+                    width: "100px",
+                    height: "40px",
+                    borderRadius: "20px",
+                    textAlign: "center",
+                    fontWeight: "normal",
+                    fontSize: themeConfig.normal.fontSize.medium.normal,
+                    backgroundColor: themeConfig.normal.mainColor,
+                    color: themeConfig.normal.whiteColor,
+                  }}
+                >
+                  <option selected value="Customer">
+                    Customer
+                  </option>
+                  <option value="Shop">Shop</option>
+                  <option value="Admin">Admin</option>
+                  <option value="Delivery">Delivery</option>
+                  <option value="Staff">Staff</option>
+                </select>
+                <TextField id="outlined-basic" label="Email or Phone" variant="outlined" />
+                <TextField id="outlined-basic" label="Password" variant="outlined" />
+              </div>
               <Button>Submit</Button>
             </div>
           ) : (

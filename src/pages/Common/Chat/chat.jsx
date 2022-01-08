@@ -191,13 +191,14 @@ function Layout({ settings, messengerState, isChatModalOpen }) {
                 name="name"
                 className="chatInput"
                 style={{
-                  backgroundColor: themeConfig[setting.theme].whiteColor,
+                  backgroundColor: themeConfig[setting.theme].secondaryColor,
                   height: "20px",
                   width: "200px",
                   borderRadius: "20px",
                   padding: "10px",
                   overflowY: "scroll",
                   marginLeft: "5px",
+                  color: "white",
                 }}
               />
               <IconButton

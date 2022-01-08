@@ -36,3 +36,25 @@
     transform: rotate(360deg);
   }
 }
+
+textarea::-webkit-input-placeholder {
+  color: #0bf;
+}
+
+textarea:-moz-placeholder {
+  /* Firefox 18- */
+  color: #0bf;
+}
+
+textarea::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #0bf;
+}
+
+textarea:-ms-input-placeholder {
+  color: #0bf;
+}
+
+textarea::placeholder {
+  color: #0bf;
+}
