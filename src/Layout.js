@@ -5,6 +5,7 @@ import Header from "./pages/Homepage/components/header";
 import Footer from "./pages/Homepage/components/footer";
 import Segment from "./pages/Homepage/components/segments";
 import SettingModal from "./pages/Homepage/components/setting";
+import LoginModal from "./pages/Auth/Login/login";
 import Chat from "./pages/Common/Chat/chat";
 import { connect } from "react-redux";
 
@@ -25,6 +26,7 @@ function Layout({ settings, messengerState }) {
     <div className="mainContainer">
       {setting.isHeaderVisible ? <Header /> : null}
       <Segment isIconMode={true} />
+      <LoginModal />
       <SettingModal />
       <NavRoutes navbarRef={navbarRef} />
       {setting.isHeaderVisible ? <Footer /> : null}

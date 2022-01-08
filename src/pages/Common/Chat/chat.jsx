@@ -4,6 +4,7 @@ import { themeConfig } from "../../../constants/themeConfig";
 import ChatIcon from "@mui/icons-material/Chat";
 import CancelIcon from "@mui/icons-material/Cancel";
 import SendIcon from "@mui/icons-material/Send";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { IconButton, TextField } from "@mui/material";
 import { messengerActionCreators } from "../../../state/messenger/messengerAction";
 import "../../../public/css/chat.css";
@@ -51,6 +52,7 @@ function Layout({ settings, messengerState, isChatModalOpen }) {
           marginBottom: "10px",
           width: "200px",
           marginRight: "auto",
+          padding: "5px",
         }}
       >
         {message.content}
@@ -66,6 +68,7 @@ function Layout({ settings, messengerState, isChatModalOpen }) {
           marginBottom: "10px",
           width: "200px",
           marginLeft: "auto",
+          padding: "5px",
         }}
       >
         {message.content}
@@ -111,7 +114,18 @@ function Layout({ settings, messengerState, isChatModalOpen }) {
                 marginRight: "auto",
               }}
             >
-              <div>Jack</div>
+              <div style={{ display: "flex", flexDirection: "row", flexFlow: "row", alignItems: "center", justifyContent: "space-between" }}>
+                <IconButton
+                  size="large"
+                  aria-label="Click to login"
+                  color="inherit"
+                  onClick={chatIconClickHandler}
+                  style={{ height: "50px", backgroundColor: themeConfig[setting.theme].mainColor, padding: "5px" }}
+                >
+                  <AccountCircleIcon style={{ color: themeConfig[setting.theme].whiteColor }} />
+                </IconButton>
+                <span style={{ color: themeConfig[setting.theme].whiteColor, fontWeight: "bold" }}>Jack</span>
+              </div>
               <IconButton
                 size="large"
                 aria-label="Click to login"
@@ -150,6 +164,11 @@ function Layout({ settings, messengerState, isChatModalOpen }) {
               backgroundColor: themeConfig[setting.theme].mainColor,
               borderStyle: "solid",
               borderColor: themeConfig[setting.theme].mainColor,
+              display: "flex",
+              flexDirection: "column",
+              flexFlow: "column",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
             <div
@@ -166,12 +185,20 @@ function Layout({ settings, messengerState, isChatModalOpen }) {
             >
               <textarea
                 rows="5"
-                col="40" 
+                col="40"
                 placeholder="Message"
                 type="text"
                 name="name"
                 className="chatInput"
-                style={{ backgroundColor: themeConfig[setting.theme].whiteColor, height: "20px", width: "200px", borderRadius: "20px", padding: "10px", overflowY: "scroll", marginLeft: "5px" }}
+                style={{
+                  backgroundColor: themeConfig[setting.theme].whiteColor,
+                  height: "20px",
+                  width: "200px",
+                  borderRadius: "20px",
+                  padding: "10px",
+                  overflowY: "scroll",
+                  marginLeft: "5px",
+                }}
               />
               <IconButton
                 size="large"

@@ -32,6 +32,8 @@ import { colorConfig } from "../../../constants/colorConfig";
 import { Link } from "@mui/material";
 import { routesData } from "../../../constants/routesData";
 import { settingActionCreators } from "../../../state/setting/settingAction";
+import { useNavigate } from "react-router-dom";
+import { messengerActionCreators } from "../../../state/messenger/messengerAction";
 
 const muiTheme = createTheme({
   palette: {
@@ -91,14 +93,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const Header = ({ profileGlobal, settings }) => {
+const Header = ({ profileGlobal, settings, messengerState }) => {
   const dispatch = useDispatch();
+  let navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [profile, setProfile] = React.useState({
     ...profileGlobal.profile,
   });
-  const [setting, setSetting] = React.useState({...settings});
+  const [setting, setSetting] = React.useState({ ...settings });
+  const [messenger, setMessenger] = React.useState({ ...messengerState });
 
   React.useEffect(() => {
     const jwtToken = localStorage.getItem("token");
@@ -112,10 +116,14 @@ const Header = ({ profileGlobal, settings }) => {
       ...profileGlobal.profile,
     });
   }, [profileGlobal]);
-  
+
   React.useEffect(() => {
     setSetting({ ...settings });
   }, [settings]);
+
+  React.useEffect(() => {
+    setMessenger({ ...messengerState });
+  }, [messengerState]);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -139,7 +147,7 @@ const Header = ({ profileGlobal, settings }) => {
 
   const handleSettingModal = () => {
     dispatch(settingActionCreators.saveSetting({ ...setting, isSettingModalOpen: true }));
-  }
+  };
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -209,7 +217,7 @@ const Header = ({ profileGlobal, settings }) => {
       </MenuItem>
       <MenuItem onClick={handleSettingModal}>
         <IconButton size="large" aria-label={`customize website fonts, color and much more`} color="inherit">
-            <SettingsIcon />
+          <SettingsIcon />
         </IconButton>
         <p>Settings</p>
       </MenuItem>
@@ -217,9 +225,11 @@ const Header = ({ profileGlobal, settings }) => {
       {!profile.isLoggedIn ? (
         <>
           <MenuItem>
-            <IconButton size="large" aria-label="Click to login" aria-controls="primary-search-account-menu" aria-haspopup="true" color="inherit">
-              <LoginIcon />
-            </IconButton>
+            <Link href={routesData.login}>
+              <IconButton size="large" aria-label="Click to login" aria-controls="primary-search-account-menu" aria-haspopup="true" color="inherit">
+                <LoginIcon />
+              </IconButton>
+            </Link>
             <p>Login</p>
           </MenuItem>
           <MenuItem>
@@ -254,6 +264,10 @@ const Header = ({ profileGlobal, settings }) => {
   //       resizeMode: "contain",
   //     },
   //   });
+  const loginClickHandler = () => {
+    dispatch(messengerActionCreators.modalOpenClose({ isMessengerModalOpen: false }));
+    dispatch(settingActionCreators.saveSetting({ ...setting, isSettingModalOpen: false, isLoginModalOpen: true }));
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -306,7 +320,7 @@ const Header = ({ profileGlobal, settings }) => {
 
               {!profile.isLoggedIn
                 ? [
-                    <MenuItem>
+                    <MenuItem onClick={loginClickHandler}>
                       <IconButton size="large" aria-label="Click to login" color="inherit" key={compIdentifier.login1}>
                         <LoginIcon />
                       </IconButton>
@@ -353,6 +367,7 @@ const mapStateToProps = (state) => {
   return {
     profileGlobal: state.user,
     settings: state.setting,
+    messengerState: state.messenger,
   };
 };
 

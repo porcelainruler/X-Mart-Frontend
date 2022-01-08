@@ -6,6 +6,8 @@ let initialState = {
   theme: "normal",
   isSegmentVisible: true,
   isHeaderVisible: true,
+  isLoginModalOpen: false,
+  loginModalOption: "login",
   fontSize: "medium",
 };
 
