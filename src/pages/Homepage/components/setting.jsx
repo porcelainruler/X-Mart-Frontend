@@ -7,7 +7,7 @@ import { colorConfig } from "../../../constants/colorConfig";
 const SettingModal = ({ settings }) => {
   const dispatch = useDispatch();
   const [setting, setSetting] = React.useState({ ...settings });
-  console.log("Setting", settings);
+  console.log("Setting", settings, setting);
 
   useEffect(() => {
     setSetting({ ...settings });

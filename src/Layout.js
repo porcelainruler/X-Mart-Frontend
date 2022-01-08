@@ -5,20 +5,40 @@ import Header from "./pages/Homepage/components/header";
 import Footer from "./pages/Homepage/components/footer";
 import Segment from "./pages/Homepage/components/segments";
 import SettingModal from "./pages/Homepage/components/setting";
+import Chat from "./pages/Common/Chat/chat";
+import { connect } from "react-redux";
 
-function Layout({ match }) {
+function Layout({ settings, messengerState }) {
   const navbarRef = useRef(null);
-  console.log("Exist");
+  const [setting, setSetting] = React.useState({ ...settings });
+  const [messenger, setMessenger] = React.useState({ ...messengerState });
+
+  React.useEffect(() => {
+    setSetting({ ...settings });
+  }, [settings]);
+
+  React.useEffect(() => {
+    setMessenger({ ...messengerState });
+  }, [messengerState]);
 
   return (
     <div className="mainContainer">
-      <Header />
+      {setting.isHeaderVisible ? <Header /> : null}
       <Segment isIconMode={true} />
       <SettingModal />
       <NavRoutes navbarRef={navbarRef} />
-      <Footer />
+      {setting.isHeaderVisible ? <Footer /> : null}
+      {setting.isHeaderVisible ? <Chat isChatModalOpen={messenger.isMessengerModalOpen} /> : null}
     </div>
   );
 }
 
-export default Layout;
+const mapStateToProps = (state) => {
+  console.log("What", state);
+  return {
+    settings: state.setting,
+    messengerState: state.messenger
+  };
+};
+
+export default connect(mapStateToProps)(Layout);

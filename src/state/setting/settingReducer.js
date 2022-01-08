@@ -1,13 +1,13 @@
-import {settingActions} from './settingAction';
+import { settingActions } from "./settingAction";
 
 // TODO: Make constant for defaults
 let initialState = {
-    isSettingModalOpen: false,
-    theme: "normal",
-    isSegmentVisible: true,
-    fontSize: "medium",
-}
-
+  isSettingModalOpen: false,
+  theme: "normal",
+  isSegmentVisible: true,
+  isHeaderVisible: true,
+  fontSize: "medium",
+};
 
 const settingReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -32,6 +32,6 @@ const settingReducer = (state = initialState, action) => {
     default:
       return state;
   }
-}
+};
 
 export default settingReducer;

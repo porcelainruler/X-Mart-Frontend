@@ -1,6 +1,6 @@
 export const settingActions = {
-    SAVE_SETTINGS: "",
-    RESTORE_DEFAULT: "",
+  SAVE_SETTINGS: "SAVE_SETTINGS",
+  RESTORE_DEFAULT: "RESTORE_DEFAULT",
 };
 
 export const settingActionCreators = {

@@ -5,6 +5,8 @@ import { ListItem, ListItemIcon, ListItemText, List, Divider } from "@mui/materi
 import { styled } from "@mui/material/styles";
 import { compIdentifier } from "../../../constants/componentIdentifiersList";
 import "../../../public/css/segmentNavbar.css";
+import { themeConfig } from "../../../constants/themeConfig";
+import { connect } from "react-redux";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -25,6 +27,13 @@ class Segments extends Component {
       segments: [],
       isIconMode: props.isIconMode === false ? props.isIconMode : true,
       isLoading: false,
+      setting: {
+        isSettingModalOpen: false,
+        theme: "normal",
+        isSegmentVisible: true,
+        isHeaderVisible: true,
+        fontSize: "medium",
+      },
     };
   }
 
@@ -42,9 +51,16 @@ class Segments extends Component {
     }, 2000);
   }
 
+  componentWillMount() {
+    const { setting } = this.props;
+    if (setting) this.setState((prevState) => ({ setting: (prevState.setting = setting) }));
+  }
+
   render() {
-    const { isLoading, segments, isIconMode } = this.state;
-    console.log("IconMode:", isIconMode);
+    // const { setting } = this.props;
+    // if (setting) this.setState((prevState) => ({ setting: (prevState.setting = setting) }));
+    const { isLoading, segments, isIconMode, setting } = this.state;
+    console.log("IconMode:", isIconMode, setting, this.props);
 
     return (
       <Fragment>
@@ -87,7 +103,7 @@ class Segments extends Component {
                   {segmentData.segments.map((segment, idx) => [
                     <Stack item key={compIdentifier.segGrid + "_" + idx}>
                       {/* <LinkIcon className={classes.linkIcon} /> */}
-                      <Item style={{ minWidth: "80px" }} className="segmentButton">
+                      <Item style={{ minWidth: "80px", fontSize: themeConfig[setting.theme].fontSize[setting.fontSize].footer }} className="segmentButton">
                         <span style={{ whiteSpace: "nowrap" }}>{segment.displayName}</span>
                       </Item>
                     </Stack>,
@@ -190,4 +206,10 @@ class Segments extends Component {
   }
 }
 
-export default Segments;
+const mapStateToProps = (state) => {
+  return {
+    settings: state.setting,
+  };
+};
+
+export default connect(mapStateToProps)(Segments);
